@@ -10,8 +10,9 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ProductCategory extends Model
+class ProductCategory extends Model implements HasMedia
 {
+    
     use SoftDeletes;
     use InteractsWithMedia;
     use HasFactory;
