@@ -30,6 +30,8 @@ class Product extends Model implements HasMedia
         'name',
         'description',
         'price',
+        'stok',
+        'photo',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -46,10 +48,7 @@ class Product extends Model implements HasMedia
         return $this->belongsToMany(ProductCategory::class);
     }
 
-    public function tags()
-    {
-        return $this->belongsToMany(ProductTag::class);
-    }
+   
 
     public function getPhotoAttribute()
     {

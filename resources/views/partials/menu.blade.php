@@ -91,6 +91,48 @@
                 </ul>
             </li>
         @endcan
+        @can('user_management_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/permissions*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/users*") ? "c-show" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-users c-sidebar-nav-icon">
+
+                    </i>
+                    Setting
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('permission_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.roles.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/permissions") || request()->is("admin/permissions/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-unlock-alt c-sidebar-nav-icon">
+
+                                </i>
+                                Config Store
+                            </a>
+                        </li>
+                    @endcan
+                    @can('role_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.roles.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/roles") || request()->is("admin/roles/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-briefcase c-sidebar-nav-icon">
+
+                                </i>
+                                Setup
+                            </a>
+                        </li>
+                    @endcan
+                    @can('user_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.users.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/users") || request()->is("admin/users/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-user c-sidebar-nav-icon">
+
+                                </i>
+                                Close / Open
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <li class="c-sidebar-nav-item">
