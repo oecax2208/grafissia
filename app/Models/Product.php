@@ -27,6 +27,7 @@ class Product extends Model implements HasMedia
     ];
 
     protected $fillable = [
+        'categories_id',
         'name',
         'description',
         'price',
@@ -42,10 +43,11 @@ class Product extends Model implements HasMedia
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
+    
 
     public function categories()
     {
-        return $this->belongsToMany(ProductCategory::class);
+        return $this->belongsTo(Category::class,'categories_id');
     }
 
    
