@@ -66,7 +66,7 @@
                             </td>
                             <td>
                                 
-                                <span class="badge badge-info">{{ $product->categories->name ?? '' }}</span>
+                                <span class="badge badge-info">{{ $product->category->name ?? '' }}</span>
                                 
                             </td>
                             
