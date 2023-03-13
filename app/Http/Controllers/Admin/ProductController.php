@@ -43,10 +43,13 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
-        $product->categories()->sync($request->input('categories', []));
+        // $product->categories()->sync($request->input('categories', []));
         // $product->tags()->sync($request->input('tags', []));
+        
+
+       
         if ($request->input('photo', false)) {
-            $product->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+            $product->addMedia(storage_path('app/public/product/' . basename($request->input('photo'))))->toMediaCollection('photo');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -79,7 +82,7 @@ class ProductController extends Controller
                 if ($product->photo) {
                     $product->photo->delete();
                 }
-                $product->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+                $product->addMedia(storage_path('product/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
             }
         } elseif ($product->photo) {
             $product->photo->delete();

@@ -78,7 +78,7 @@
                             </td>
                             <td>
                                 
-                                <span class="badge badge-info"><?php echo e($product->category->name ?? ''); ?></span>
+                                <span class="badge badge-info"><?php echo e($product->categories->name ?? ''); ?></span>
                                 
                             </td>
                             

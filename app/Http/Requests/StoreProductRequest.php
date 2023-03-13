@@ -38,6 +38,9 @@ class StoreProductRequest extends FormRequest
             'tags.*' => [
                 'integer',
             ],
+            [
+                'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            ],
            
         ];
     }
