@@ -44,12 +44,23 @@
                 <span class="help-block"><?php echo e(trans('cruds.product.fields.price_helper')); ?></span>
             </div>
             <div class="form-group">
+                <label class="required" for="stok">Stock Product</label>
+                <input class="form-control <?php echo e($errors->has('stok') ? 'is-invalid' : ''); ?>" type="number" name="stok" id="stok" value="<?php echo e(old('stok', '')); ?>" step="1" required>
+                <?php if($errors->has('stok')): ?>
+                    <div class="invalid-feedback">
+                        <?php echo e($errors->first('stok')); ?>
+
+                    </div>
+                <?php endif; ?>
+                <span class="help-block"><?php echo e(trans('cruds.product.fields.price_helper')); ?></span>
+            </div>
+            <div class="form-group">
                 <label for="categories"><?php echo e(trans('cruds.product.fields.category')); ?></label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0"><?php echo e(trans('global.select_all')); ?></span>
                     <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0"><?php echo e(trans('global.deselect_all')); ?></span>
                 </div>
-                <select class="form-control select2 <?php echo e($errors->has('categories') ? 'is-invalid' : ''); ?>" name="categories[]" id="categories" multiple>
+                <select class="form-control select2 <?php echo e($errors->has('categories') ? 'is-invalid' : ''); ?>" name="categories[]" id="categories">
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($id); ?>" <?php echo e(in_array($id, old('categories', [])) ? 'selected' : ''); ?>><?php echo e($category); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

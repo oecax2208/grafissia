@@ -64,16 +64,16 @@
                             <td>
                                 {{ $product->price ?? '' }}
                             </td>
-                            <td>
-                                @foreach($product->categories as $key => $item)
+                            <!-- <td>
+                                @foreach($product->category as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
-                            </td>
+                            </td> -->
                             
                             <td>
                                 @if($product->photo)
-                                    <a href="{{ $product->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $product->photo->getUrl('thumb') }}">
+                                    <a href="{{ $product->photo }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $product->photo }}">
                                     </a>
                                 @endif
                             </td>
