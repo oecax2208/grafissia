@@ -64,11 +64,11 @@
                             <td>
                                 {{ $product->price ?? '' }}
                             </td>
-                            <!-- <td>
-                                @foreach($product->category as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td> -->
+                            <td>
+                                
+                                <span class="badge badge-info">{{ $product->category->name ?? '' }}</span>
+                                
+                            </td>
                             
                             <td>
                                 @if($product->photo)

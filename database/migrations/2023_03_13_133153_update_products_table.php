@@ -15,7 +15,7 @@ class UpdateProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('categories_id')->after('name');
-           // Add "categories" column
+           // Add "Categories" column
         });
     }
 
@@ -28,7 +28,7 @@ class UpdateProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('categories_id')->after('name');
-           // Add "categories" column
-        });php 
+           // Add "Categories" column
+        });
     }
 }
