@@ -40,6 +40,16 @@
                 <span class="help-block">{{ trans('cruds.product.fields.price_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="stok">Stock Product</label>
+                <input class="form-control {{ $errors->has('stok') ? 'is-invalid' : '' }}" type="number" name="stok" id="stok" value="{{ old('stok', '') }}" step="1" required>
+                @if($errors->has('stok'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('stok') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.product.fields.price_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="categories">{{ trans('cruds.product.fields.category') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
