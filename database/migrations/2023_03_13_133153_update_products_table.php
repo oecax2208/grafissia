@@ -13,7 +13,10 @@ class UpdateProductsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('categories_id')->after('name');
+           // Add "categories" column
+        });
     }
 
     /**
@@ -23,6 +26,9 @@ class UpdateProductsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('categories_id')->after('name');
+           // Add "categories" column
+        });php 
     }
 }
