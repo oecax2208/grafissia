@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label for="categories">{{ trans('cruds.product.fields.category') }}</label>
                 <div style="padding-bottom: 4px">
-                   
+
                 </div>
                 <select class="form-control select2 {{ $errors->has('categories_id') ? 'is-invalid' : '' }}" name="categories_id" id="categories_id">
                     @foreach($categories as $id => $category)
@@ -66,7 +66,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.category_helper') }}</span>
             </div>
-            
+
             <div class="form-group">
                 <label for="photo">{{ trans('cruds.product.fields.photo') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">

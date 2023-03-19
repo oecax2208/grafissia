@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('product_create')): ?>
     <div style="margin-bottom: 10px;" class="row">
@@ -44,7 +43,7 @@
                             <?php echo e(trans('cruds.product.fields.category')); ?>
 
                         </th>
-                      
+
                         <th>
                             <?php echo e(trans('cruds.product.fields.photo')); ?>
 
@@ -77,15 +76,15 @@
 
                             </td>
                             <td>
-                                
-                                <span class="badge badge-info"><?php echo e($product->categories->name ?? ''); ?></span>
-                                
+
+                                <span class="badge badge-info"><?php echo e($product->category->name ?? ''); ?></span>
+
                             </td>
-                            
+
                             <td>
                                 <?php if($product->photo): ?>
-                                    <a href="<?php echo e($product->photo); ?>" target="_blank" style="display: inline-block">
-                                        <img src="<?php echo e($product->photo); ?>">
+                                    <a href="<?php echo e(asset('storage/'.$product->photo->id.'/'.$product->photo->file_name)); ?>" target="_blank" style="display: inline-block">
+                                        <img src="<?php echo e(asset('storage/'.$product->photo->id.'/'.$product->photo->file_name)); ?>" alt="<?php echo e($product->photo->name); ?>" style="width: 40px;height:40px;">
                                     </a>
                                 <?php endif; ?>
                             </td>
@@ -170,9 +169,10 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\grafissia\resources\views/admin/products/index.blade.php ENDPATH**/ ?>

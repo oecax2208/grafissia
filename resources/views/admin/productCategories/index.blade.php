@@ -56,8 +56,8 @@
                             </td>
                             <td>
                                 @if($productCategory->photo)
-                                    <a href="{{ $productCategory->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $productCategory->photo->getUrl('thumb') }}">
+                                    <a href="{{ asset('storage/'.$productCategory->photo->id.'/'.$productCategory->photo->file_name) }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ asset('storage/'.$productCategory->photo->id.'/'.$productCategory->photo->file_name) }}" alt="{{ $productCategory->photo->name }}" style="width: 40px;height:40px;">
                                     </a>
                                 @endif
                             </td>
@@ -140,7 +140,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

@@ -37,7 +37,7 @@
                         <th>
                             {{ trans('cruds.product.fields.category') }}
                         </th>
-                      
+
                         <th>
                             {{ trans('cruds.product.fields.photo') }}
                         </th>
@@ -65,15 +65,15 @@
                                 {{ $product->price ?? '' }}
                             </td>
                             <td>
-                                
+
                                 <span class="badge badge-info">{{ $product->category->name ?? '' }}</span>
-                                
+
                             </td>
-                            
+
                             <td>
                                 @if($product->photo)
-                                    <a href="{{ $product->photo }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $product->photo }}">
+                                    <a href="{{ asset('storage/'.$product->photo->id.'/'.$product->photo->file_name) }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ asset('storage/'.$product->photo->id.'/'.$product->photo->file_name) }}" alt="{{ $product->photo->name }}" style="width: 40px;height:40px;">
                                     </a>
                                 @endif
                             </td>
@@ -156,7 +156,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

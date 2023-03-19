@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('product_category_create')): ?>
     <div style="margin-bottom: 10px;" class="row">
@@ -65,8 +64,8 @@
                             </td>
                             <td>
                                 <?php if($productCategory->photo): ?>
-                                    <a href="<?php echo e($productCategory->photo->getUrl()); ?>" target="_blank" style="display: inline-block">
-                                        <img src="<?php echo e($productCategory->photo->getUrl('thumb')); ?>">
+                                    <a href="<?php echo e(asset('storage/'.$productCategory->photo->id.'/'.$productCategory->photo->file_name)); ?>" target="_blank" style="display: inline-block">
+                                        <img src="<?php echo e(asset('storage/'.$productCategory->photo->id.'/'.$productCategory->photo->file_name)); ?>" alt="<?php echo e($productCategory->photo->name); ?>" style="width: 40px;height:40px;">
                                     </a>
                                 <?php endif; ?>
                             </td>
@@ -151,9 +150,10 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\grafissia\resources\views/admin/productCategories/index.blade.php ENDPATH**/ ?>

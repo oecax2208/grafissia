@@ -42,22 +42,19 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
-        // $product->categories()->sync($request->input('categories', []));
-        // $product->tags()->sync($request->input('tags', []));
-        
+        $productCategory = Product::create($request->all());
 
-       
         if ($request->input('photo', false)) {
-            $product->addMedia(storage_path('app/public/product/' . basename($request->input('photo'))))->toMediaCollection('photo');
+            $productCategory->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
         }
 
         if ($media = $request->input('ck-media', false)) {
-            Media::whereIn('id', $media)->update(['model_id' => $product->id]);
+            Media::whereIn('id', $media)->update(['model_id' => $productCategory->id]);
         }
 
         return redirect()->route('admin.products.index');
     }
+
 
     public function edit(Product $product)
     {
