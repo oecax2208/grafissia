@@ -2,70 +2,48 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
-class Product extends Model implements HasMedia
+use App\Models\Cart;
+class Product extends Model
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    protected $fillable=['title','slug','summary','description','cat_id','child_cat_id','price','brand_id','discount','status','photo','size','stock','is_featured','condition'];
 
-    public $table = 'products';
-
-    protected $appends = [
-        'photo',
-    ];
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
-    protected $fillable = [
-        'categories_id',
-        'name',
-        'description',
-        'price',
-        'stok',
-        'photo',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')->fit('crop', 50, 50);
-        $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    public function cat_info(){
+        return $this->hasOne('App\Models\Category','id','cat_id');
     }
-    
-
-    public function categories()
-    {
-        return $this->belongsTo(Category::class,'categories_id');
+    public function sub_cat_info(){
+        return $this->hasOne('App\Models\Category','id','child_cat_id');
     }
-
-   
-
-    public function getPhotoAttribute()
-    {
-        $file = $this->getMedia('photo')->last();
-        if ($file) {
-            $file->url       = $file->getUrl();
-            $file->thumbnail = $file->getUrl('thumb');
-            $file->preview   = $file->getUrl('preview');
+    public static function getAllProduct(){
+        return Product::with(['cat_info','sub_cat_info'])->orderBy('id','desc')->paginate(10);
+    }
+    public function rel_prods(){
+        return $this->hasMany('App\Models\Product','cat_id','cat_id')->where('status','active')->orderBy('id','DESC')->limit(8);
+    }
+    public function getReview(){
+        return $this->hasMany('App\Models\ProductReview','product_id','id')->with('user_info')->where('status','active')->orderBy('id','DESC');
+    }
+    public static function getProductBySlug($slug){
+        return Product::with(['cat_info','rel_prods','getReview'])->where('slug',$slug)->first();
+    }
+    public static function countActiveProduct(){
+        $data=Product::where('status','active')->count();
+        if($data){
+            return $data;
         }
-
-        return $file;
+        return 0;
     }
 
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
+    public function carts(){
+        return $this->hasMany(Cart::class)->whereNotNull('order_id');
     }
+
+    public function wishlists(){
+        return $this->hasMany(Wishlist::class)->whereNotNull('cart_id');
+    }
+
+    public function brand(){
+        return $this->hasOne(Brand::class,'id','brand_id');
+    }
+
 }
