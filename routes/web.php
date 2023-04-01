@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +44,11 @@ Route::get('/add-to-cart/{slug}','CartController@addToCart')->name('add-to-cart'
 Route::post('/add-to-cart','CartController@singleAddToCart')->name('single-add-to-cart')->middleware('user');
 Route::get('cart-delete/{id}','CartController@cartDelete')->name('cart-delete');
 Route::post('cart-update','CartController@cartUpdate')->name('cart.update');
+
+// Quick checkout
+Route::get('quick-checkout/{product_detail}','FrontendController@quickCheckout')->name('quick.checkout');
+Route::post('quick-checkout/{id}','FrontendController@paymentFaspay')->name('quick.checkout.process');
+
 
 Route::get('/cart',function(){
     return view('frontend.pages.cart');
@@ -143,14 +148,9 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::post('change-password', 'AdminController@changPasswordStore')->name('change.password');
 });
 
-
-
-
-
-
-
-
-
+// Faspay
+Route::post('/payment', [PaymentController::class, 'redirectToFaspay'])->name('payment.redirect');
+Route::get('/payment/callback', [PaymentController::class, 'handleFaspayCallback'])->name('payment.callback');
 
 // User section start
 Route::group(['prefix'=>'/user','middleware'=>['user']],function(){

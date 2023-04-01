@@ -148,7 +148,7 @@ class Helper{
     // Total price with shipping and coupon
     public static function grandPrice($id,$user_id){
         $order=Order::find($id);
-        dd($id);
+        // dd($id);
         if($order){
             $shipping_price=(float)$order->shipping->price;
             $order_price=self::orderPrice($id,$user_id);
